@@ -11,6 +11,24 @@ router.get('/', ash(async(req, res) => {
   res.status(200).json(campuses);
 }));
 
+router.post('/', function (req, res, next) {
+  Campus.create(req.body)
+    .then(createdCampus => res.status(200).json(createdCampus))
+    .catch(err => next(err));
+});
+
+router.delete('/:id', function (req, res, next) {
+  Campus.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(() => res.status(200).json("Deleted a campus!"))
+    .catch(err => next(err));
+});
+
+
+
 /** GET CAMPUS BY ID*/
 router.get('/:id', ash(async(req, res) => {
   let campus = await Campus.findByPk(req.params.id, {include: [Student]});

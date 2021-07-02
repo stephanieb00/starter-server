@@ -11,6 +11,13 @@ router.get('/', ash(async(req, res) => {
   res.status(200).json(campuses);
 }));
 
+
+/** GET CAMPUS BY ID*/
+router.get('/:id', ash(async(req, res) => {
+  let campus = await Campus.findByPk(req.params.id, {include: [Student]});
+  res.status(200).json(campus);
+}));
+
 router.post('/', function (req, res, next) {
   Campus.create(req.body)
     .then(createdCampus => res.status(200).json(createdCampus))
@@ -27,13 +34,6 @@ router.delete('/:id', function (req, res, next) {
     .catch(err => next(err));
 });
 
-
-
-/** GET CAMPUS BY ID*/
-router.get('/:id', ash(async(req, res) => {
-  let campus = await Campus.findByPk(req.params.id, {include: [Student]});
-  res.status(200).json(campus);
-}));
 
 // Export our router, so that it can be imported to construct our apiRouter;
 module.exports = router;

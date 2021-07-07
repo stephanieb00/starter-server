@@ -81,6 +81,7 @@ const seedDB = async () => {
 		firstname: "Lucifer",
 		  lastname: "Morningstar",
 		email: "lmorningstar@arizonastate.edu",
+		imageUrl:"https://static.wikia.nocookie.net/lucifer/images/0/02/S3_promo_-_Lucifer_Morningstar.jpg/revision/latest?cb=20180529224917",
 		gpa:4.0
 	});
 
@@ -88,6 +89,7 @@ const seedDB = async () => {
 		firstname: "Chloe",
 		  lastname: "Decker",
 		email: "cdecker@arizonastate.edu",
+		imageUrl:"https://static.wikia.nocookie.net/lucifer/images/c/cc/S3_promo_-_Chloe_Decker.jpg/revision/latest?cb=20180809215729",
 		gpa:3.2
 	});
 
@@ -95,8 +97,10 @@ const seedDB = async () => {
 		firstname: "Felicity",
 		  lastname: "Smoke",
 		email: "felicitys@mit.edu",
+		imageUrl:"https://upload.wikimedia.org/wikipedia/en/f/f8/Felicity_Smoak_%28Emily_Bett_Rickards%29.jpg",
 		gpa:4.0
 	});
+	
 	const dummy_student8 = await Student.create({
 		firstname: "Helen",
 		  lastname: "Gao",

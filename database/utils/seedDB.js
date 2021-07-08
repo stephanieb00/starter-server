@@ -69,6 +69,7 @@ const seedDB = async () => {
 		email: "juniorw@standford.edu",
 		gpa:3.4
 	});
+	await dummy_student3.setCampus(dummy_campus4);
 
 	const dummy_student4 = await Student.create({
 		firstname: "Ruben",
@@ -76,22 +77,25 @@ const seedDB = async () => {
 		email: "rtio@nyu.edu",
 		gpa:2.5
 	});
+	await dummy_student4.setCampus(dummy_campus3);
 
 	const dummy_student5 = await Student.create({
 		firstname: "Lucifer",
 		  lastname: "Morningstar",
 		email: "lmorningstar@arizonastate.edu",
-		imageUrl:"https://static.wikia.nocookie.net/lucifer/images/0/02/S3_promo_-_Lucifer_Morningstar.jpg/revision/latest?cb=20180529224917",
+		imageUrl:"https://i.pinimg.com/originals/00/6d/24/006d24f949971703ec23e70f5be07e55.png",
 		gpa:4.0
 	});
+	await dummy_student5.setCampus(dummy_campus6);
 
 	const dummy_student6 = await Student.create({
 		firstname: "Chloe",
 		  lastname: "Decker",
 		email: "cdecker@arizonastate.edu",
-		imageUrl:"https://static.wikia.nocookie.net/lucifer/images/c/cc/S3_promo_-_Chloe_Decker.jpg/revision/latest?cb=20180809215729",
+		imageUrl:"https://quizforfan.com/wp-content/uploads/2017/11/chloe.jpg",
 		gpa:3.2
 	});
+	await dummy_student6.setCampus(dummy_campus6);
 
 	const dummy_student7 = await Student.create({
 		firstname: "Felicity",
@@ -100,6 +104,7 @@ const seedDB = async () => {
 		imageUrl:"https://upload.wikimedia.org/wikipedia/en/f/f8/Felicity_Smoak_%28Emily_Bett_Rickards%29.jpg",
 		gpa:4.0
 	});
+	await dummy_student7.setCampus(dummy_campus5);
 	
 	const dummy_student8 = await Student.create({
 		firstname: "Helen",
@@ -107,7 +112,7 @@ const seedDB = async () => {
 		email: "hgao@uam.edu",
 		gpa: 2.8
 	});
-	
+	await dummy_student8.setCampus(dummy_campus7);
 	
 }
 

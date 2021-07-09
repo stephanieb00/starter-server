@@ -7,10 +7,12 @@ const ash = require('express-async-handler');
 /** GET ALL CAMPUSES */
 
 router.get('/', ash(async(req, res) => {
-  let campuses = await Campus.findAll({include: [Student]});
+  let campuses = await Campus.findAll({
+    include: [Student],
+    order: [['id', 'ASC']]
+  });
   res.status(200).json(campuses);
 }));
-
 
 /** GET CAMPUS BY ID*/
 router.get('/:id', ash(async(req, res) => {
@@ -18,36 +20,36 @@ router.get('/:id', ash(async(req, res) => {
   res.status(200).json(campus);
 }));
 
-/** ADD NEW CAMPUS */
-router.post('/', function(req, res, next) {
-  Campus.create(req.body)
-    .then(createdCampus => res.status(200).json(createdCampus))
-    .catch(err => next(err));
-});
-
-/** DELETE CAMPUS */
-router.delete('/:id', function(req, res, next) {
-  Campus.destroy({
+// Delete campus
+router.delete('/:id', ash(async(req, res) => {
+  await Campus.destroy({
     where: {
       id: req.params.id
     }
-  })
-    .then(() => res.status(200).json("Deleted a campus!"))
-    .catch(err => next(err));
-});
-
-/******************* EDIT *********************/
-
-router.put('/:id', ash(async(req, res) => {
-  await Campus.update(req.body,
-        { where: {id: req.params.id} }
-  );
-  let campus = await Campus.findByPk(req.params.id);
-  res.status(201).json(campus);
+  });
+  res.status(200).json("Deleted a campus!");
 }));
 
-// Export our router, so that it can be imported to construct our apiRouter;
-module.exports = router;
+// Add new campus
+router.post('/', ash(async(req, res) => {
+  let newCampus = await Campus.create(req.body);
+  res.status(200).json(newCampus);
+}));
+
+// Edit Campus
+router.put('/:id', ash(async(req, res) => {
+  //Puts "" to null values for imageURL to allow default value
+  //be constructed.
+  if (req.body.imageURL === "")
+    req.body.imageURL = "https://cdn.onlinewebfonts.com/svg/img_379742.png";
+  await Campus.update(req.body, {
+    where: {
+      id: req.params.id
+    }
+  });
+  let campus = await Campus.findByPk(req.params.id, {include: [Student]});
+  res.status(201).json(campus);
+}))
 
 // Export our router, so that it can be imported to construct our apiRouter;
 module.exports = router;

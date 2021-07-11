@@ -31,10 +31,11 @@ router.delete('/:id', ash(async(req, res) => {
 }));
 
 // Add new campus
-router.post('/', ash(async(req, res) => {
-  let newCampus = await Campus.create(req.body);
-  res.status(200).json(newCampus);
-}));
+router.post('/', function (req, res, next) {
+  Campus.create(req.body)
+    .then(createdCampus => res.status(200).json(createdCampus))
+    .catch(err => next(err));
+});
 
 // Edit Campus
 router.put('/:id', ash(async(req, res) => {
@@ -47,7 +48,7 @@ router.put('/:id', ash(async(req, res) => {
       id: req.params.id
     }
   });
-  let campus = await Campus.findByPk(req.params.id, {include: [Student]});
+  let campus = await Campus.findByPk(req.params.id);
   res.status(201).json(campus);
 }))
 

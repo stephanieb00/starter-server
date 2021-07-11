@@ -33,6 +33,7 @@ const Student = db.define("student", {
   },
   gpa: {
     type: Sequelize.DECIMAL,
+    defaultValue: 0.0,
     validate: {
       max: 4.0,
       min: 0.0
